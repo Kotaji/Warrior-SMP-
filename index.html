@@ -1,56 +1,211 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Warrior SMP</title>
+  <meta charset="UTF-8">
+  <title>Warrior SMP - Login</title>
   <style>
     body {
-      background-color: #1e1e1e;
-      color: white;
+      margin: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 100px;
-      animation: fadeIn 2s ease-in;
-    }
-    h1 {
-      font-size: 48px;
-      animation: slideDown 1.5s ease-out;
-    }
-    .warrior {
-      color: red;
-    }
-    .smp {
-      color: orange;
-    }
-    button {
-      background-color: cyan;
-      color: black;
-      border: none;
-      padding: 15px 30px;
-      margin: 20px;
-      font-size: 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    button:hover {
-      background-color: #00cccc;
-      transform: scale(1.05);
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
+      background: url('https://images3.alphacoders.com/132/thumb-1920-1321959.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }.container, .main-content {
+  background-color: rgba(30, 30, 30, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
+  width: 90%;
+  max-width: 500px;
+  display: none;
+}
+
+h1.title {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+h1.title span:first-child {
+  color: red;
+}
+
+h1.title span:last-child {
+  color: orange;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 6px;
+  background: #444;
+  color: white;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #00b894;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #019875;
+}
+
+.toggle-link {
+  text-align: center;
+  margin-top: 10px;
+  color: #74b9ff;
+  cursor: pointer;
+}
+
+.main-content {
+  background-color: rgba(30, 30, 30, 0.9);
+  max-width: 700px;
+  text-align: center;
+}
+
+.main-content h1 {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.main-content button {
+  background-color: cyan;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 20px;
+  padding: 14px 30px;
+  border-radius: 10px;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.main-content button:hover {
+  transform: scale(1.05);
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
   </style>
 </head>
 <body>
-  <h1><span class="warrior">Warrior</span> <span class="smp">SMP</span></h1>
-  <button onclick="window.open('https://mcpedl.org/uploads_files/28-03-2025/minecraft-1-21-71-music.apk', '_blank')">Download Minecraft Free</button>
-</body>
+  <div class="container" id="authSection">
+    <h1 class="title"><span>Warrior</span> <span>SMP</span></h1>
+    <h2 id="formTitle">Login</h2><form id="loginForm">
+  <input type="text" id="loginUsername" placeholder="Username" required>
+  <input type="password" id="loginPassword" placeholder="Password" required>
+  <div class="error-message" id="loginError"></div>
+  <button type="submit">Login</button>
+  <div class="toggle-link" onclick="toggleForm()">Not registered? Create an account</div>
+</form>
+
+<form id="registerForm" style="display:none;">
+  <input type="text" id="registerUsername" placeholder="Username" required>
+  <input type="email" id="registerEmail" placeholder="Email" required>
+  <input type="password" id="registerPassword" placeholder="Password" required>
+  <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+  <div class="error-message" id="registerError"></div>
+  <button type="submit">Register</button>
+  <div class="toggle-link" onclick="toggleForm()">Already have an account? Login</div>
+</form>
+
+  </div>  <div class="main-content" id="mainPage">
+    <h1><span>Warrior</span> <span>SMP</span></h1>
+    <p style="text-align: center; font-size: 18px; margin-bottom: 10px;">Welcome to the official Warrior SMP server!</p>
+    <button onclick="window.open('https://mcpedl.org/uploads_files/28-03-2025/minecraft-1-21-71-music.apk', '_blank')">Download Minecraft</button>
+  </div>  <script>
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const authSection = document.getElementById('authSection');
+    const mainPage = document.getElementById('mainPage');
+    const title = document.getElementById('formTitle');
+    const loginError = document.getElementById('loginError');
+    const registerError = document.getElementById('registerError');
+
+    let users = [{ username: "admin", password: "1234" }];
+
+    function toggleForm() {
+      if (loginForm.style.display === "none") {
+        loginForm.style.display = "block";
+        registerForm.style.display = "none";
+        title.innerText = "Login";
+        loginError.textContent = "";
+        registerError.textContent = "";
+      } else {
+        loginForm.style.display = "none";
+        registerForm.style.display = "block";
+        title.innerText = "Register";
+        loginError.textContent = "";
+        registerError.textContent = "";
+      }
+    }
+
+    function showMainPage() {
+      authSection.style.display = "none";
+      mainPage.style.display = "block";
+    }
+
+    loginForm.onsubmit = function(e) {
+      e.preventDefault();
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+
+      const user = users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        showMainPage();
+      } else {
+        loginError.textContent = "Incorrect username or password.";
+      }
+    };
+
+    registerForm.onsubmit = function(e) {
+      e.preventDefault();
+      const username = document.getElementById('registerUsername').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const confirm = document.getElementById('confirmPassword').value;
+
+      if (password !== confirm) {
+        registerError.textContent = "Passwords do not match.";
+        return;
+      }
+
+      const exists = users.some(u => u.username === username);
+      if (exists) {
+        registerError.textContent = "Username already exists.";
+        return;
+      }
+
+      users.push({ username, password });
+      toggleForm();
+    };
+
+    // Start on login page only
+    authSection.style.display = "block";
+  </script></body>
 </html>
