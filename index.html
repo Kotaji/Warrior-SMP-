@@ -14,9 +14,9 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      flex-direction: column;
     }
-
-    .container, .main-content {
+    .container, .main-content, .feedback-section, .download-section {
       background-color: rgba(30, 30, 30, 0.9);
       padding: 40px;
       border-radius: 10px;
@@ -25,22 +25,15 @@
       max-width: 500px;
       display: none;
     }
-
     h1.title {
       text-align: center;
       font-size: 48px;
       margin-bottom: 20px;
     }
-
     h1.title span:first-child { color: red; }
     h1.title span:last-child { color: orange; }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    input[type="text"], input[type="password"], input[type="email"] {
+    h2 { text-align: center; margin-bottom: 20px; }
+    input, textarea {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
@@ -49,7 +42,6 @@
       background: #444;
       color: white;
     }
-
     button {
       width: 100%;
       padding: 12px;
@@ -62,149 +54,158 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-
     button:hover { background-color: #019875; }
-
     .toggle-link {
       text-align: center;
       margin-top: 10px;
       color: #74b9ff;
       cursor: pointer;
     }
-
-    .main-content {
+    .main-content, .feedback-section, .download-section {
       max-width: 700px;
       text-align: center;
     }
-
-    .main-content h1 {
-      font-size: 64px;
-      margin-bottom: 20px;
-      color: orange;
-    }
-
-    .main-content button {
+    .main-content button, .feedback-section button, .download-section button {
       background-color: cyan;
       color: black;
       font-weight: bold;
       font-size: 20px;
-      margin: 20px;
+      margin: 20px 0;
       padding: 14px 30px;
       border-radius: 10px;
       border: none;
       transition: transform 0.3s ease;
     }
-
-    .main-content button:hover { transform: scale(1.05); }
-
-    .error-msg {
-      text-align: center;
-      color: red;
-      margin-top: 10px;
-      font-weight: bold;
+    .main-content button:hover, .feedback-section button:hover, .download-section button:hover {
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <!-- Login/Register Section -->
   <div class="container" id="authSection">
     <h1 class="title"><span>Warrior</span> <span>SMP</span></h1>
     <h2 id="formTitle">Login</h2>
     <form id="loginForm">
-      <input id="loginUsername" type="text" placeholder="Username" required>
-      <input id="loginPassword" type="password" placeholder="Password" required>
+      <input type="text" id="loginUsername" placeholder="Username" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
       <button type="submit">Login</button>
-      <div class="error-msg" id="loginError"></div>
       <div class="toggle-link" onclick="toggleForm()">Not registered? Create an account</div>
+      <p id="loginError" style="color: red; display: none;">Incorrect username or password</p>
     </form>
-
     <form id="registerForm" style="display:none;">
-      <input id="regUsername" type="text" placeholder="Username" required>
-      <input id="regEmail" type="email" placeholder="Email" required>
-      <input id="regPassword" type="password" placeholder="Password" required>
-      <input id="regConfirm" type="password" placeholder="Confirm Password" required>
+      <input type="text" id="regUsername" placeholder="Username" required>
+      <input type="email" id="regEmail" placeholder="Email" required>
+      <input type="password" id="regPassword" placeholder="Password" required>
+      <input type="password" id="regConfirm" placeholder="Confirm Password" required>
       <button type="submit">Register</button>
-      <div class="error-msg" id="registerError"></div>
       <div class="toggle-link" onclick="toggleForm()">Already have an account? Login</div>
     </form>
   </div>
 
-  <!-- Main Warrior SMP Page -->
   <div class="main-content" id="mainPage">
     <h1><span>Warrior</span> <span>SMP</span></h1>
-    <p style="text-align: center; font-size: 18px; margin-bottom: 10px;">Welcome to the official Warrior SMP server!</p>
-    <button onclick="window.open('https://mcpedl.org/uploads_files/28-03-2025/minecraft-1-21-71-music.apk', '_blank')">Download Minecraft</button>
+    <button onclick="showDownloadOptions()">Download Minecraft</button>
+    <p style="text-align: center; font-size: 18px;">Welcome to the official Warrior SMP server!</p>
+    <p onclick="showFeedback()" style="cursor: pointer; color: cyan; font-size: 18px; font-weight: bold; margin-top: 20px; text-align: center;">Any Issues tell Here</p>
+  </div>
+
+  <div class="feedback-section" id="feedbackSection">
+    <form action="https://formsubmit.co/example@gmail.com" method="POST">
+      <h2>Issues and Feedback</h2>
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Issues and Feedback" required></textarea>
+      <input type="hidden" name="_captcha" value="false">
+      <button type="submit">Send Feedback</button>
+    </form>
+    <p class="toggle-link" onclick="showMainPage()">Back to Main</p>
+  </div>
+
+  <div class="download-section" id="downloadSection">
+    <h2>Select Version to Download</h2>
+    <button onclick="window.open('https://mcpedl.org/uploads_files/28-03-2025/minecraft-1-21-71-music.apk', '_blank')">Stable Version</button>
+    <button onclick="window.open('https://mcpedl.org/uploads_files/03-04-2025/minecraft-1-21-80-25-music.apk', '_blank')">Beta Version</button>
+    <p style="text-align: center; font-size: 18px;">Latest Version will be released Here. You will get Message On Group </p>
+    <p style="text-align: center; font-size: 18px;">NOTE: Beta version is for testing so if you Downloaded beta version and try to connect server u will not connected!</p>
+    <p class="toggle-link" onclick="showMainPage()">Back to Main</p>
   </div>
 
   <script>
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
     const authSection = document.getElementById('authSection');
     const mainPage = document.getElementById('mainPage');
-    const title = document.getElementById('formTitle');
-
+    const feedbackSection = document.getElementById('feedbackSection');
+    const downloadSection = document.getElementById('downloadSection');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const formTitle = document.getElementById('formTitle');
     const loginError = document.getElementById('loginError');
-    const registerError = document.getElementById('registerError');
+
+    let users = JSON.parse(localStorage.getItem('users') || '{}');
 
     function toggleForm() {
-      loginError.textContent = '';
-      registerError.textContent = '';
       if (loginForm.style.display === "none") {
         loginForm.style.display = "block";
         registerForm.style.display = "none";
-        title.innerText = "Login";
+        formTitle.innerText = "Login";
       } else {
         loginForm.style.display = "none";
         registerForm.style.display = "block";
-        title.innerText = "Register";
+        formTitle.innerText = "Register";
       }
     }
 
     function showMainPage() {
       authSection.style.display = "none";
       mainPage.style.display = "block";
+      feedbackSection.style.display = "none";
+      downloadSection.style.display = "none";
+    }
+
+    function showFeedback() {
+      authSection.style.display = "none";
+      mainPage.style.display = "none";
+      feedbackSection.style.display = "block";
+      downloadSection.style.display = "none";
+    }
+
+    function showDownloadOptions() {
+      authSection.style.display = "none";
+      mainPage.style.display = "none";
+      feedbackSection.style.display = "none";
+      downloadSection.style.display = "block";
     }
 
     loginForm.onsubmit = function(e) {
       e.preventDefault();
-      loginError.textContent = "";
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
 
-      const username = document.getElementById("loginUsername").value;
-      const password = document.getElementById("loginPassword").value;
-
-      const storedUser = JSON.parse(localStorage.getItem(username));
-      if (storedUser && storedUser.password === password) {
+      if (users[username] && users[username].password === password) {
+        loginError.style.display = "none";
         showMainPage();
       } else {
-        loginError.textContent = "Incorrect username or password.";
+        loginError.style.display = "block";
       }
     };
 
     registerForm.onsubmit = function(e) {
       e.preventDefault();
-      registerError.textContent = "";
-
-      const username = document.getElementById("regUsername").value;
-      const email = document.getElementById("regEmail").value;
-      const password = document.getElementById("regPassword").value;
-      const confirm = document.getElementById("regConfirm").value;
+      const username = document.getElementById('regUsername').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+      const confirm = document.getElementById('regConfirm').value;
 
       if (password !== confirm) {
-        registerError.textContent = "Passwords do not match.";
+        alert("Passwords do not match");
         return;
       }
 
-      if (localStorage.getItem(username)) {
-        registerError.textContent = "Username already exists.";
-        return;
-      }
-
-      localStorage.setItem(username, JSON.stringify({ email, password }));
-      alert("Registration successful! You can now log in.");
+      users[username] = { email, password };
+      localStorage.setItem('users', JSON.stringify(users));
+      alert("Registration successful!");
       toggleForm();
     };
 
-    // Always start on login page
     authSection.style.display = "block";
   </script>
 </body>
