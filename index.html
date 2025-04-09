@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Warrior SMP - Login</title>
@@ -13,154 +14,149 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-    }.container, .main-content {
-  background-color: rgba(30, 30, 30, 0.9);
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.7);
-  width: 90%;
-  max-width: 500px;
-  display: none;
-}
+    }
 
-h1.title {
-  text-align: center;
-  font-size: 48px;
-  margin-bottom: 20px;
-}
+    .container, .main-content {
+      background-color: rgba(30, 30, 30, 0.9);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.7);
+      width: 90%;
+      max-width: 500px;
+      display: none;
+    }
 
-h1.title span:first-child {
-  color: red;
-}
+    h1.title {
+      text-align: center;
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
 
-h1.title span:last-child {
-  color: orange;
-}
+    h1.title span:first-child { color: red; }
+    h1.title span:last-child { color: orange; }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-input[type="text"], input[type="password"], input[type="email"] {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 6px;
-  background: #444;
-  color: white;
-}
+    input[type="text"], input[type="password"], input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+      background: #444;
+      color: white;
+    }
 
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background-color: #00b894;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background-color: #00b894;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-button:hover {
-  background-color: #019875;
-}
+    button:hover { background-color: #019875; }
 
-.toggle-link {
-  text-align: center;
-  margin-top: 10px;
-  color: #74b9ff;
-  cursor: pointer;
-}
+    .toggle-link {
+      text-align: center;
+      margin-top: 10px;
+      color: #74b9ff;
+      cursor: pointer;
+    }
 
-.main-content {
-  background-color: rgba(30, 30, 30, 0.9);
-  max-width: 700px;
-  text-align: center;
-}
+    .main-content {
+      max-width: 700px;
+      text-align: center;
+    }
 
-.main-content h1 {
-  font-size: 64px;
-  margin-bottom: 20px;
-}
+    .main-content h1 {
+      font-size: 64px;
+      margin-bottom: 20px;
+      color: orange;
+    }
 
-.main-content button {
-  background-color: cyan;
-  color: black;
-  font-weight: bold;
-  font-size: 20px;
-  margin: 20px;
-  padding: 14px 30px;
-  border-radius: 10px;
-  border: none;
-  transition: transform 0.3s ease;
-}
+    .main-content button {
+      background-color: cyan;
+      color: black;
+      font-weight: bold;
+      font-size: 20px;
+      margin: 20px;
+      padding: 14px 30px;
+      border-radius: 10px;
+      border: none;
+      transition: transform 0.3s ease;
+    }
 
-.main-content button:hover {
-  transform: scale(1.05);
-}
+    .main-content button:hover { transform: scale(1.05); }
 
-.error-message {
-  color: red;
-  text-align: center;
-  margin-top: 10px;
-  font-size: 14px;
-}
-
+    .error-msg {
+      text-align: center;
+      color: red;
+      margin-top: 10px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
+  <!-- Login/Register Section -->
   <div class="container" id="authSection">
     <h1 class="title"><span>Warrior</span> <span>SMP</span></h1>
-    <h2 id="formTitle">Login</h2><form id="loginForm">
-  <input type="text" id="loginUsername" placeholder="Username" required>
-  <input type="password" id="loginPassword" placeholder="Password" required>
-  <div class="error-message" id="loginError"></div>
-  <button type="submit">Login</button>
-  <div class="toggle-link" onclick="toggleForm()">Not registered? Create an account</div>
-</form>
+    <h2 id="formTitle">Login</h2>
+    <form id="loginForm">
+      <input id="loginUsername" type="text" placeholder="Username" required>
+      <input id="loginPassword" type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <div class="error-msg" id="loginError"></div>
+      <div class="toggle-link" onclick="toggleForm()">Not registered? Create an account</div>
+    </form>
 
-<form id="registerForm" style="display:none;">
-  <input type="text" id="registerUsername" placeholder="Username" required>
-  <input type="email" id="registerEmail" placeholder="Email" required>
-  <input type="password" id="registerPassword" placeholder="Password" required>
-  <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-  <div class="error-message" id="registerError"></div>
-  <button type="submit">Register</button>
-  <div class="toggle-link" onclick="toggleForm()">Already have an account? Login</div>
-</form>
+    <form id="registerForm" style="display:none;">
+      <input id="regUsername" type="text" placeholder="Username" required>
+      <input id="regEmail" type="email" placeholder="Email" required>
+      <input id="regPassword" type="password" placeholder="Password" required>
+      <input id="regConfirm" type="password" placeholder="Confirm Password" required>
+      <button type="submit">Register</button>
+      <div class="error-msg" id="registerError"></div>
+      <div class="toggle-link" onclick="toggleForm()">Already have an account? Login</div>
+    </form>
+  </div>
 
-  </div>  <div class="main-content" id="mainPage">
+  <!-- Main Warrior SMP Page -->
+  <div class="main-content" id="mainPage">
     <h1><span>Warrior</span> <span>SMP</span></h1>
     <p style="text-align: center; font-size: 18px; margin-bottom: 10px;">Welcome to the official Warrior SMP server!</p>
     <button onclick="window.open('https://mcpedl.org/uploads_files/28-03-2025/minecraft-1-21-71-music.apk', '_blank')">Download Minecraft</button>
-  </div>  <script>
+  </div>
+
+  <script>
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
     const authSection = document.getElementById('authSection');
     const mainPage = document.getElementById('mainPage');
     const title = document.getElementById('formTitle');
+
     const loginError = document.getElementById('loginError');
     const registerError = document.getElementById('registerError');
 
-    let users = [{ username: "admin", password: "1234" }];
-
     function toggleForm() {
+      loginError.textContent = '';
+      registerError.textContent = '';
       if (loginForm.style.display === "none") {
         loginForm.style.display = "block";
         registerForm.style.display = "none";
         title.innerText = "Login";
-        loginError.textContent = "";
-        registerError.textContent = "";
       } else {
         loginForm.style.display = "none";
         registerForm.style.display = "block";
         title.innerText = "Register";
-        loginError.textContent = "";
-        registerError.textContent = "";
       }
     }
 
@@ -171,12 +167,13 @@ button:hover {
 
     loginForm.onsubmit = function(e) {
       e.preventDefault();
-      const username = document.getElementById('loginUsername').value;
-      const password = document.getElementById('loginPassword').value;
+      loginError.textContent = "";
 
-      const user = users.find(u => u.username === username && u.password === password);
+      const username = document.getElementById("loginUsername").value;
+      const password = document.getElementById("loginPassword").value;
 
-      if (user) {
+      const storedUser = JSON.parse(localStorage.getItem(username));
+      if (storedUser && storedUser.password === password) {
         showMainPage();
       } else {
         loginError.textContent = "Incorrect username or password.";
@@ -185,27 +182,30 @@ button:hover {
 
     registerForm.onsubmit = function(e) {
       e.preventDefault();
-      const username = document.getElementById('registerUsername').value;
-      const email = document.getElementById('registerEmail').value;
-      const password = document.getElementById('registerPassword').value;
-      const confirm = document.getElementById('confirmPassword').value;
+      registerError.textContent = "";
+
+      const username = document.getElementById("regUsername").value;
+      const email = document.getElementById("regEmail").value;
+      const password = document.getElementById("regPassword").value;
+      const confirm = document.getElementById("regConfirm").value;
 
       if (password !== confirm) {
         registerError.textContent = "Passwords do not match.";
         return;
       }
 
-      const exists = users.some(u => u.username === username);
-      if (exists) {
+      if (localStorage.getItem(username)) {
         registerError.textContent = "Username already exists.";
         return;
       }
 
-      users.push({ username, password });
+      localStorage.setItem(username, JSON.stringify({ email, password }));
+      alert("Registration successful! You can now log in.");
       toggleForm();
     };
 
-    // Start on login page only
+    // Always start on login page
     authSection.style.display = "block";
-  </script></body>
+  </script>
+</body>
 </html>
