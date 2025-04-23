@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Warrior SMP - Login</title>
+  <title>Warrior SMP - Shutdown</title>
   <style>
     body {
       margin: 0;
@@ -15,198 +15,31 @@
       align-items: center;
       height: 100vh;
       flex-direction: column;
+      text-align: center;
     }
-    .container, .main-content, .feedback-section, .download-section {
+    .message-box {
       background-color: rgba(30, 30, 30, 0.9);
       padding: 40px;
       border-radius: 10px;
       box-shadow: 0 0 25px rgba(0,0,0,0.7);
-      width: 90%;
-      max-width: 500px;
-      display: none;
-    }
-    h1.title {
-      text-align: center;
-      font-size: 48px;
-      margin-bottom: 20px;
+      max-width: 600px;
     }
     h1.title span:first-child { color: red; }
     h1.title span:last-child { color: orange; }
-    h2 { text-align: center; margin-bottom: 20px; }
-    input, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 6px;
-      background: #444;
-      color: white;
+    h1.title {
+      font-size: 48px;
+      margin-bottom: 20px;
     }
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 15px;
-      background-color: #00b894;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover { background-color: #019875; }
-    .toggle-link {
-      text-align: center;
-      margin-top: 10px;
-      color: #74b9ff;
-      cursor: pointer;
-    }
-    .main-content, .feedback-section, .download-section {
-      max-width: 700px;
-      text-align: center;
-    }
-    .main-content button, .feedback-section button, .download-section button {
-      background-color: cyan;
-      color: black;
-      font-weight: bold;
+    p.message {
       font-size: 20px;
-      margin: 20px 0;
-      padding: 14px 30px;
-      border-radius: 10px;
-      border: none;
-      transition: transform 0.3s ease;
-    }
-    .main-content button:hover, .feedback-section button:hover, .download-section button:hover {
-      transform: scale(1.05);
+      color: #dfe6e9;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="authSection">
+  <div class="message-box">
     <h1 class="title"><span>Warrior</span> <span>SMP</span></h1>
-    <h2 id="formTitle">Login</h2>
-    <form id="loginForm">
-      <input type="text" id="loginUsername" placeholder="Username" required>
-      <input type="password" id="loginPassword" placeholder="Password" required>
-      <button type="submit">Login</button>
-      <div class="toggle-link" onclick="toggleForm()">Not registered? Create an account</div>
-      <p id="loginError" style="color: red; display: none;">Incorrect username or password</p>
-    </form>
-    <form id="registerForm" style="display:none;">
-      <input type="text" id="regUsername" placeholder="Username" required>
-      <input type="email" id="regEmail" placeholder="Email" required>
-      <input type="password" id="regPassword" placeholder="Password" required>
-      <input type="password" id="regConfirm" placeholder="Confirm Password" required>
-      <button type="submit">Register</button>
-      <div class="toggle-link" onclick="toggleForm()">Already have an account? Login</div>
-    </form>
+    <p class="message">The server is officially shutdown.<br>Thanks everyone for being part of this journey.</p>
   </div>
-
-  <div class="main-content" id="mainPage">
-    <h1><span>Warrior</span> <span>SMP</span></h1>
-    <button onclick="showDownloadOptions()">Download Minecraft</button>
-    <p style="text-align: center; font-size: 18px;">Welcome to the official Warrior SMP server!</p>
-    <p onclick="showFeedback()" style="cursor: pointer; color: cyan; font-size: 18px; font-weight: bold; margin-top: 20px; text-align: center;">Any Issues tell Here</p>
-  </div>
-
-  <div class="feedback-section" id="feedbackSection">
-    <form action="https://formsubmit.co/tas4262143@gmail.com" method="POST">
-      <h2>Issues and Feedback</h2>
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Issues and Feedback" required></textarea>
-      <input type="hidden" name="_captcha" value="false">
-      <button type="submit">Send Feedback</button>
-    </form>
-    <p class="toggle-link" onclick="showMainPage()">Back to Main</p>
-  </div>
-
-  <div class="download-section" id="downloadSection">
-    <h2>Select Version to Download</h2>
-    <button onclick="window.open('https://mcpedl.org/uploads_files/08-04-2025/minecraft-1-21-72-music.apk', '_blank')">Stable Version</button>
-    <button onclick="window.open('https://mcpedl.org/uploads_files/08-04-2025/minecraft-1-21-80-27-music.apk', '_blank')">Beta Version</button>
-    <p style="text-align: center; font-size: 18px;">Latest Version will be released Here. You will get Message On Group </p>
-    <p style="text-align: center; font-size: 18px;">NOTE: Beta version is for testing so if you Downloaded beta version and try to connect server u will not connected!</p>
-    <p class="toggle-link" onclick="showMainPage()">Back to Main</p>
-  </div>
-
-  <script>
-    const authSection = document.getElementById('authSection');
-    const mainPage = document.getElementById('mainPage');
-    const feedbackSection = document.getElementById('feedbackSection');
-    const downloadSection = document.getElementById('downloadSection');
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const formTitle = document.getElementById('formTitle');
-    const loginError = document.getElementById('loginError');
-
-    let users = JSON.parse(localStorage.getItem('users') || '{}');
-
-    function toggleForm() {
-      if (loginForm.style.display === "none") {
-        loginForm.style.display = "block";
-        registerForm.style.display = "none";
-        formTitle.innerText = "Login";
-      } else {
-        loginForm.style.display = "none";
-        registerForm.style.display = "block";
-        formTitle.innerText = "Register";
-      }
-    }
-
-    function showMainPage() {
-      authSection.style.display = "none";
-      mainPage.style.display = "block";
-      feedbackSection.style.display = "none";
-      downloadSection.style.display = "none";
-    }
-
-    function showFeedback() {
-      authSection.style.display = "none";
-      mainPage.style.display = "none";
-      feedbackSection.style.display = "block";
-      downloadSection.style.display = "none";
-    }
-
-    function showDownloadOptions() {
-      authSection.style.display = "none";
-      mainPage.style.display = "none";
-      feedbackSection.style.display = "none";
-      downloadSection.style.display = "block";
-    }
-
-    loginForm.onsubmit = function(e) {
-      e.preventDefault();
-      const username = document.getElementById('loginUsername').value;
-      const password = document.getElementById('loginPassword').value;
-
-      if (users[username] && users[username].password === password) {
-        loginError.style.display = "none";
-        showMainPage();
-      } else {
-        loginError.style.display = "block";
-      }
-    };
-
-    registerForm.onsubmit = function(e) {
-      e.preventDefault();
-      const username = document.getElementById('regUsername').value;
-      const email = document.getElementById('regEmail').value;
-      const password = document.getElementById('regPassword').value;
-      const confirm = document.getElementById('regConfirm').value;
-
-      if (password !== confirm) {
-        alert("Passwords do not match");
-        return;
-      }
-
-      users[username] = { email, password };
-      localStorage.setItem('users', JSON.stringify(users));
-      alert("Registration successful!");
-      toggleForm();
-    };
-
-    authSection.style.display = "block";
-  </script>
 </body>
 </html>
